@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gekdesign.com.au/sitemap.xml
