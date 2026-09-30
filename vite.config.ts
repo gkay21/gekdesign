@@ -2,10 +2,11 @@ import { reactRouter } from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import {defineConfig} from 'vite';
+import { responsiveImages } from './vite.imagetools';
 
 export default defineConfig(() => {
   return {
-    plugins: [reactRouter(), tailwindcss()],
+    plugins: [reactRouter(), tailwindcss(), responsiveImages()],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, '.'),

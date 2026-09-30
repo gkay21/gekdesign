@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, Clock, Calendar, BookOpen } from 'lucide-react';
 import { Article, ARTICLES } from '../data/articles';
+import { CardLink } from '../components/CardLink';
+import { articlePath } from '../paths';
 
 interface InsightsPageProps {
   onSelectArticle: (article: Article) => void;
@@ -49,10 +51,11 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ onSelectArticle, onS
       {/* Articles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {filteredArticles.map((article) => (
-          <article
+          <CardLink
             key={article.id}
-            onClick={() => onSelectArticle(article)}
-            className="group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] p-8 flex flex-col justify-between space-y-8 hover:border-white/25 transition-all duration-300"
+            href={articlePath(article.slug)}
+            onNavigate={() => onSelectArticle(article)}
+            className="group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] p-8 flex flex-col justify-between space-y-8 hover:border-white/25 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between text-xs text-neutral-400 font-mono">
@@ -82,7 +85,7 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ onSelectArticle, onS
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </div>
-          </article>
+          </CardLink>
         ))}
       </div>
 

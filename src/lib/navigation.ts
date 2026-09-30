@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 import { Project } from '../data/projects';
 import { Article } from '../data/articles';
-import { PATHS, contactPath } from '../paths';
+import { PATHS, articlePath, contactPath, projectPath } from '../paths';
 
 interface ModalState {
   openedInApp?: boolean;
@@ -16,11 +16,9 @@ export const useSiteNavigation = () => {
 
   const startProject = (service?: string) => navigate(contactPath(service));
 
-  const openProject = (project: Project) =>
-    navigate(`${PATHS.work}/${project.slug}`, MODAL_NAVIGATION);
+  const openProject = (project: Project) => navigate(projectPath(project.slug), MODAL_NAVIGATION);
 
-  const openArticle = (article: Article) =>
-    navigate(`${PATHS.insights}/${article.slug}`, MODAL_NAVIGATION);
+  const openArticle = (article: Article) => navigate(articlePath(article.slug), MODAL_NAVIGATION);
 
   return { navigate, goTo, startProject, openProject, openArticle };
 };

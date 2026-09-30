@@ -4,7 +4,7 @@ import { ArticleModal } from '../components/ArticleModal';
 import { ARTICLES } from '../data/articles';
 import { useCloseModal, useSiteNavigation } from '../lib/navigation';
 import { absoluteUrl, pageTitle, seo, SITE_NAME } from '../lib/seo';
-import { PATHS } from '../paths';
+import { PATHS, articlePath } from '../paths';
 
 const findArticle = (slug?: string) => ARTICLES.find((article) => article.slug === slug);
 
@@ -12,7 +12,7 @@ export const meta = ({ params }: Route.MetaArgs) => {
   const article = findArticle(params.slug);
   if (!article) return seo({ title: pageTitle('Article not found'), description: '', path: PATHS.insights, noindex: true });
 
-  const path = `${PATHS.insights}/${article.slug}`;
+  const path = articlePath(article.slug);
 
   return seo({
     title: pageTitle(article.title),

@@ -149,7 +149,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
             {step === 1 && (
               <div className="space-y-6 animate-fade-in">
                 <div className="space-y-1">
-                  <h3 className="font-display text-2xl font-bold text-white">What capabilities do you require?</h3>
+                  <h2 className="font-display text-2xl font-bold text-white">What capabilities do you require?</h2>
                   <p className="text-xs text-neutral-400">Select all that apply to your upcoming initiative.</p>
                 </div>
 
@@ -160,6 +160,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                       <button
                         type="button"
                         key={svc}
+                        aria-pressed={isSelected}
                         onClick={() => toggleService(svc)}
                         className={`p-4 rounded-xl text-left border transition-all cursor-pointer flex items-center justify-between ${
                           isSelected
@@ -195,7 +196,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                 {/* Budget */}
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <h3 className="font-display text-2xl font-bold text-white">What is your expected investment tier?</h3>
+                    <h2 className="font-display text-2xl font-bold text-white">What is your expected investment tier?</h2>
                     <p className="text-xs text-neutral-400">This helps us allocate the proper senior team & resources.</p>
                   </div>
 
@@ -204,6 +205,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                       <button
                         type="button"
                         key={b.label}
+                        aria-pressed={selectedBudget === b.label}
                         onClick={() => setSelectedBudget(b.label)}
                         className={`p-4 rounded-xl text-left border transition-all cursor-pointer ${
                           selectedBudget === b.label
@@ -221,7 +223,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                 {/* Timeline */}
                 <div className="space-y-4 pt-4 border-t border-white/10">
                   <div className="space-y-1">
-                    <h4 className="font-display text-xl font-bold text-white">Target launch window?</h4>
+                    <h3 className="font-display text-xl font-bold text-white">Target launch window?</h3>
                     <p className="text-xs text-neutral-400">When does the digital platform need to be live?</p>
                   </div>
 
@@ -230,6 +232,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                       <button
                         type="button"
                         key={t.label}
+                        aria-pressed={selectedTimeline === t.label}
                         onClick={() => setSelectedTimeline(t.label)}
                         className={`p-4 rounded-xl text-left border transition-all cursor-pointer ${
                           selectedTimeline === t.label
@@ -269,33 +272,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
             {step === 3 && (
               <form onSubmit={handleSubmit} noValidate className="space-y-6 animate-fade-in">
                 <div className="space-y-1">
-                  <h3 className="font-display text-2xl font-bold text-white">Your details & project vision</h3>
+                  <h2 className="font-display text-2xl font-bold text-white">Your details & project vision</h2>
                   <p className="text-xs text-neutral-400">Our principals will review this briefing prior to our introductory call.</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-neutral-300">Your Full Name *</label>
+                    <label htmlFor="contact-name" className="text-xs font-mono text-neutral-300">Your Full Name *</label>
                     <input
+                      id="contact-name"
                       type="text"
+                      autoComplete="name"
                       required
                       value={formData.name}
                       onChange={(e) => updateField('name', e.target.value)}
                       aria-invalid={Boolean(fieldErrors.name)}
-                      placeholder="e.g. Jean-Luc Vasseur"
+                      placeholder="e.g. Jane Smith"
                       className={inputClass(Boolean(fieldErrors.name))}
                     />
                     {fieldErrors.name && <p className="text-[11px] font-mono text-red-400">{fieldErrors.name}</p>}
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-neutral-300">Work Email Address *</label>
+                    <label htmlFor="contact-email" className="text-xs font-mono text-neutral-300">Work Email Address *</label>
                     <input
+                      id="contact-email"
                       type="email"
+                      autoComplete="email"
                       required
                       value={formData.email}
                       onChange={(e) => updateField('email', e.target.value)}
                       aria-invalid={Boolean(fieldErrors.email)}
-                      placeholder="e.g. jlv@brand.com"
+                      placeholder="e.g. jane@company.com"
                       className={inputClass(Boolean(fieldErrors.email))}
                     />
                     {fieldErrors.email && <p className="text-[11px] font-mono text-red-400">{fieldErrors.email}</p>}
@@ -304,9 +311,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-neutral-300">Company / Brand Name</label>
+                    <label htmlFor="contact-company" className="text-xs font-mono text-neutral-300">Company / Brand Name</label>
                     <input
+                      id="contact-company"
                       type="text"
+                      autoComplete="organization"
                       value={formData.company}
                       onChange={(e) => updateField('company', e.target.value)}
                       placeholder="e.g. Your Company Pty Ltd"
@@ -314,9 +323,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-neutral-300">Current Website / Deck URL</label>
+                    <label htmlFor="contact-website" className="text-xs font-mono text-neutral-300">Current Website / Deck URL</label>
                     <input
+                      id="contact-website"
                       type="url"
+                      autoComplete="url"
                       value={formData.website}
                       onChange={(e) => updateField('website', e.target.value)}
                       placeholder="https://"
@@ -326,8 +337,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-neutral-300">Brief Overview of Goals & Challenges</label>
+                  <label htmlFor="contact-message" className="text-xs font-mono text-neutral-300">Brief Overview of Goals & Challenges</label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     value={formData.message}
                     onChange={(e) => updateField('message', e.target.value)}

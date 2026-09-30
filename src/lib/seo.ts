@@ -1,8 +1,23 @@
 import type { MetaDescriptor } from 'react-router';
-import defaultShareImage from '../assets/images/studio_creative_workspace_1790321300104.jpg';
+import type { Picture } from 'vite-imagetools';
+import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg?responsive';
 
 export const SITE_URL = 'https://gekdesign.com.au';
 export const SITE_NAME = 'GEK Design';
+
+const SHARE_IMAGE_WIDTH = 1280;
+
+/** A JPEG URL from a responsive picture, for places that need one plain file (e.g. og:image). */
+export const pictureJpeg = (picture: Picture, width = SHARE_IMAGE_WIDTH): string => {
+  const srcset = picture.sources.jpeg ?? picture.sources.jpg ?? '';
+  const match = srcset
+    .split(',')
+    .map((candidate) => candidate.trim().split(/\s+/))
+    .find(([, descriptor]) => descriptor === `${width}w`);
+  return match?.[0] ?? picture.img.src;
+};
+
+const defaultShareImage = pictureJpeg(studioWorkspace);
 
 interface SeoOptions {
   title: string;

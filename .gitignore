@@ -3,6 +3,9 @@ build/
 .react-router/
 dist/
 coverage/
+test-results/
+playwright-report/
+scripts/mockups/.cache/
 .DS_Store
 *.log
 .env*

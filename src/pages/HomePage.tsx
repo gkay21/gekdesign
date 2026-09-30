@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { ArrowUpRight, ArrowRight, CheckCircle2, ChevronRight, Monitor, Smartphone, Sparkles } from 'lucide-react';
 import { Project, PROJECTS } from '../data/projects';
 import { SERVICES, PROCESS_STEPS, CREDIBILITY_METRICS } from '../data/services';
-import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg';
+import { CardLink } from '../components/CardLink';
+import { ResponsiveImage } from '../components/ResponsiveImage';
+import { projectPath } from '../paths';
+import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg?responsive';
 
 interface HomePageProps {
   onSelectProject: (project: Project) => void;
@@ -108,28 +111,32 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </button>
                   </div>
 
-                  <button
-                    onClick={() => onSelectProject(activeProject)}
-                    className="inline-flex items-center gap-1 text-xs font-mono text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+                  <CardLink
+                    href={projectPath(activeProject.slug)}
+                    onNavigate={() => onSelectProject(activeProject)}
+                    className="inline-flex items-center gap-1 text-xs font-mono text-blue-400 hover:text-blue-300 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
                   >
                     <span>Inspect Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
+                  </CardLink>
                 </div>
               </div>
 
               {/* Viewport Frame */}
               <div className="relative bg-neutral-950 p-4 sm:p-8 flex items-center justify-center min-h-[380px] sm:min-h-[500px]">
-                <div
-                  className={`transition-all duration-500 overflow-hidden rounded-xl border border-white/10 shadow-2xl relative group cursor-pointer ${
+                <CardLink
+                  href={projectPath(activeProject.slug)}
+                  onNavigate={() => onSelectProject(activeProject)}
+                  tabIndex={-1}
+                  className={`block transition-all duration-500 overflow-hidden rounded-xl border border-white/10 shadow-2xl relative group cursor-pointer ${
                     heroDevice === 'desktop' ? 'w-full max-w-5xl' : 'w-[320px]'
                   }`}
-                  onClick={() => onSelectProject(activeProject)}
                 >
-                  <img
-                    src={activeProject.heroImage}
+                  <ResponsiveImage
+                    picture={activeProject.heroImage}
                     alt={activeProject.title}
-                    referrerPolicy="no-referrer"
+                    sizes="(min-width: 1100px) 1024px, 100vw"
+                    priority
                     className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
                   />
                   {/* Overlay banner with project details */}
@@ -140,15 +147,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                         <span aria-hidden="true">·</span>
                         <span>{activeProject.industry}</span>
                       </div>
-                      <h3 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                      <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
                         {activeProject.title}
-                      </h3>
+                      </h2>
                       <p className="text-xs sm:text-sm text-neutral-300 max-w-xl">
                         {activeProject.shortOutcome}
                       </p>
                     </div>
                   </div>
-                </div>
+                </CardLink>
               </div>
             </div>
           </div>
@@ -176,16 +183,17 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Varied Editorial Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10">
           {/* Card 1: Wide Marquee Card (Col 12) */}
-          <div
-            onClick={() => onSelectProject(featuredProjects[0])}
-            className="md:col-span-12 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300"
+          <CardLink
+            href={projectPath(featuredProjects[0].slug)}
+            onNavigate={() => onSelectProject(featuredProjects[0])}
+            className="block md:col-span-12 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12">
               <div className="lg:col-span-7 overflow-hidden relative min-h-[320px] sm:min-h-[440px]">
-                <img
-                  src={featuredProjects[0].heroImage}
+                <ResponsiveImage
+                  picture={featuredProjects[0].heroImage}
                   alt={featuredProjects[0].title}
-                  referrerPolicy="no-referrer"
+                  sizes="(min-width: 1280px) 700px, (min-width: 1024px) 58vw, 100vw"
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
@@ -228,18 +236,19 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
               </div>
             </div>
-          </div>
+          </CardLink>
 
           {/* Card 2: 7 cols */}
-          <div
-            onClick={() => onSelectProject(featuredProjects[1])}
-            className="md:col-span-7 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
+          <CardLink
+            href={projectPath(featuredProjects[1].slug)}
+            onNavigate={() => onSelectProject(featuredProjects[1])}
+            className="md:col-span-7 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <div className="overflow-hidden relative h-72 sm:h-96">
-              <img
-                src={featuredProjects[1].heroImage}
+              <ResponsiveImage
+                picture={featuredProjects[1].heroImage}
                 alt={featuredProjects[1].title}
-                referrerPolicy="no-referrer"
+                sizes="(min-width: 1280px) 700px, (min-width: 768px) 58vw, 100vw"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </div>
@@ -261,18 +270,19 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </span>
               </div>
             </div>
-          </div>
+          </CardLink>
 
           {/* Card 3: 5 cols */}
-          <div
-            onClick={() => onSelectProject(featuredProjects[2])}
-            className="md:col-span-5 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
+          <CardLink
+            href={projectPath(featuredProjects[2].slug)}
+            onNavigate={() => onSelectProject(featuredProjects[2])}
+            className="md:col-span-5 group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <div className="overflow-hidden relative h-72 sm:h-96">
-              <img
-                src={featuredProjects[2].heroImage}
+              <ResponsiveImage
+                picture={featuredProjects[2].heroImage}
                 alt={featuredProjects[2].title}
-                referrerPolicy="no-referrer"
+                sizes="(min-width: 1280px) 500px, (min-width: 768px) 42vw, 100vw"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </div>
@@ -294,7 +304,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </span>
               </div>
             </div>
-          </div>
+          </CardLink>
         </div>
       </section>
 
@@ -380,10 +390,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             {/* Studio Workspace Image */}
             <div className="lg:col-span-5 rounded-xl overflow-hidden border border-white/10">
-              <img
-                src={studioWorkspace}
+              <ResponsiveImage
+                picture={studioWorkspace}
                 alt="GEK Design Creative Studio"
-                referrerPolicy="no-referrer"
+                sizes="(min-width: 1280px) 520px, (min-width: 1024px) 42vw, 100vw"
                 className="w-full h-80 object-cover object-center"
               />
             </div>

@@ -1,15 +1,16 @@
+import type { Picture } from 'vite-imagetools';
 // Real site screenshots: Fairfield composited onto the monitor in project_fairfield_dental_care_1790327371933.jpg;
 // Mini Minds as overlapping full-page captures in the style of the Studio Aeterna image.
-import fairfieldDentalHero from '../assets/images/project_fairfield_dental_care_office.jpg';
-import miniMindsHero from '../assets/images/project_miniminds_stacked.jpg';
+import fairfieldDentalHero from '../assets/images/project_fairfield_dental_care_office.jpg?responsive';
+import miniMindsHero from '../assets/images/project_miniminds_stacked.jpg?responsive';
 // Unibet: live unibet.com.au screenshot composited onto the glass display from the original Chronos image.
-import unibetHero from '../assets/images/project_unibet_glass.jpg';
+import unibetHero from '../assets/images/project_unibet_glass.jpg?responsive';
 // Stan: live stan.com.au screenshot composited onto Unsplash jLn20MzqfdE (Petri R, Unsplash License).
-import stanHero from '../assets/images/project_stan_desk.jpg';
+import stanHero from '../assets/images/project_stan_desk.jpg?responsive';
 // Vodafone: archived Feb 2021 vodafone.com.au/mobile-phones (Wayback Machine) on Unsplash gVpXbCGG6jI (Unsplash License).
-import vodafoneHero from '../assets/images/project_vodafone_desk.jpg';
+import vodafoneHero from '../assets/images/project_vodafone_desk.jpg?responsive';
 // Jira: Atlassian's public Ecosystem Jira issue view (people blurred) in the app-window scene from the Strata image.
-import jiraHero from '../assets/images/project_jira_window.jpg';
+import jiraHero from '../assets/images/project_jira_window.jpg?responsive';
 
 export interface Project {
   id: string;
@@ -28,8 +29,7 @@ export interface Project {
   status: string;
   /** Actual technologies used, shown in the preview frame. */
   stack: string[];
-  heroImage: string;
-  secondaryImage?: string;
+  heroImage: Picture;
   featured: boolean;
   accentColor: string;
   liveUrl?: string;
@@ -135,12 +135,12 @@ export const PROJECTS: Project[] = [
       detail: '99.99% uptime SLA guaranteed by GEK Design',
     },
     metrics: [
-      { label: 'Mobile Performance', value: '92/100', subtext: 'Lighthouse mobile, median of three runs (September 2026)' },
-      { label: 'Lighthouse SEO', value: '100/100', subtext: 'Plus 100 Best Practices and 96 Accessibility' },
+      { label: 'Lighthouse', value: '100/100', subtext: 'Performance, accessibility, best practices and SEO on mobile and desktop (PageSpeed Insights, September 2026)' },
+      { label: 'Local Suburbs', value: '7', subtext: 'Covered by ChildCare structured data and suburb-specific FAQs' },
       { label: 'Age Programs', value: '3', subtext: 'Nursery, toddler and preschool, from 6 weeks to 5 years' }
     ],
     challenge: 'Mini Minds is a long day care centre at 1 Watts Place, West Hoxton NSW, caring for children from 6 weeks to 5 years, Monday to Friday, 7am to 6pm. The centre needed a website that feels as warm and playful as the centre itself, answers the questions parents actually ask — which program suits my child, what does a day look like, how does enrolment work — and turns that interest into tour bookings. It also had to be found by families searching across the surrounding South West Sydney suburbs.',
-    approach: 'We designed and built a single-page site in React, Vite and Tailwind CSS, with anchor-linked sections for the centre’s story, philosophy, age-based programs, daily routine, gallery, reviews, a three-step enrolment guide, FAQs and contact. Book a Tour calls to action run through the page, and the enquiry form validates Australian phone numbers before sending to GEK Design’s shared mailer service on AWS Lambda and Amazon SES. After launch we ran a dedicated performance and accessibility pass: the page is now pre-rendered at build time so content appears before JavaScript loads, fonts are self-hosted and preloaded, below-the-fold sections and animations are code-split, images were converted and right-sized (the hero image is skipped entirely on mobile), and colour contrast, form labels and heading order were fixed. For local search, ChildCare structured data lists the address, opening hours and the seven suburbs the centre serves, and the FAQ answers the suburb-specific questions families search for.',
+    approach: 'We designed and built a single-page site in React, Vite and Tailwind CSS, with anchor-linked sections for the centre’s story, philosophy, age-based programs, daily routine, gallery, reviews, a three-step enrolment guide, FAQs and contact. Book a Tour calls to action run through the page, and the enquiry form validates Australian phone numbers before sending to GEK Design’s shared mailer service on AWS Lambda and Amazon SES. After launch we ran a dedicated performance and accessibility pass: the page is now pre-rendered at build time so content appears before JavaScript loads, fonts are self-hosted and preloaded, below-the-fold sections and animations are code-split, images were converted and right-sized (the hero image is skipped entirely on mobile), and colour contrast, form labels and heading order were fixed. A further optimisation pass in September 2026 took the site to a perfect 100 in all four Lighthouse categories, on both mobile and desktop. For local search, ChildCare structured data lists the address, opening hours and the seven suburbs the centre serves, and the FAQ answers the suburb-specific questions families search for.',
     designSystem: {
       fontDisplay: 'Fredoka',
       fontBody: 'Nunito',

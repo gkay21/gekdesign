@@ -26,8 +26,8 @@ export const ARTICLES: Article[] = [
     date: 'September 2026',
     summary: 'Why excessive decoration, animated clutter, and aggressive popups destroy high-ticket consumer trust, and how intentional whitespace commands commercial authority.',
     author: {
-      name: 'Frederik Møller',
-      role: 'Creative Director & Co-Founder'
+      name: 'George El-Khoury',
+      role: 'Founder & Principal Engineer'
     },
     content: [
       {
@@ -57,16 +57,16 @@ export const ARTICLES: Article[] = [
     date: 'August 2026',
     summary: 'Technical blueprints for building modern e-commerce storefronts that combine editorial art direction with sub-second page loads and frictionless checkout.',
     author: {
-      name: 'Astrid Chen',
-      role: 'Head of Engineering'
+      name: 'George El-Khoury',
+      role: 'Founder & Principal Engineer'
     },
     content: [
       {
         sectionHeading: 'The False Dichotomy of Brand vs Performance',
         body: [
           'For years, brands were forced to choose between rigid template stores that loaded quickly but looked identical to everyone else, or custom creative agencies that built gorgeous sites that took eight seconds to load on mobile.',
-          'By leveraging modern React 19 server components, edge edge routing, and headless commerce engines, we eliminate this tradeoff entirely.',
-          'Our flagships consistently hit 98+ mobile Lighthouse performance benchmarks while delivering fluid WebGL shaders and real-time 3D configurators.'
+          'By leveraging modern React 19 server components, edge routing, and headless commerce engines, we eliminate this tradeoff entirely.',
+          'Our recent build for Mini Minds Early Learning Centre scores a perfect 100/100 in every Lighthouse category, on both mobile and desktop.'
         ]
       },
       {
@@ -88,8 +88,8 @@ export const ARTICLES: Article[] = [
     date: 'July 2026',
     summary: 'How to structure design tokens and modular UI components so engineering and design remain tightly aligned as companies scale beyond Series B.',
     author: {
-      name: 'Marcus Vance',
-      role: 'Principal Product Strategist'
+      name: 'George El-Khoury',
+      role: 'Founder & Principal Engineer'
     },
     content: [
       {

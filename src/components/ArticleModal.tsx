@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { X, ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
 import { Article } from '../data/articles';
+import { useDialog } from '../lib/useDialog';
 
 interface ArticleModalProps {
   article: Article | null;
@@ -9,22 +10,18 @@ interface ArticleModalProps {
 }
 
 export const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onStartProject }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  const dialogRef = useDialog<HTMLDivElement>(onClose);
 
   if (!article) return null;
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-label={article.title}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl animate-fade-in"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl animate-fade-in focus:outline-none"
     >
       <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#09090B]/95 px-6 py-4 backdrop-blur-md">
         <button
@@ -37,7 +34,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, on
 
         <button
           onClick={onClose}
-          className="p-1.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus:outline-none"
+          className="p-1.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-label="Close article"
         >
           <X className="w-5 h-5" />

@@ -14,6 +14,12 @@ import { Footer } from './components/Footer';
 import { NotFound } from './components/NotFound';
 import { useSiteNavigation } from './lib/navigation';
 import { SITE_NAME, SITE_URL } from './lib/seo';
+import '@fontsource-variable/plus-jakarta-sans/wght.css';
+import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
+import '@fontsource-variable/syne/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import syneLatin from '@fontsource-variable/syne/files/syne-latin-wght-normal.woff2?url';
+import jakartaLatin from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
 import './index.css';
 
 const ORGANIZATION_JSON_LD = {
@@ -36,12 +42,12 @@ const ORGANIZATION_JSON_LD = {
 };
 
 export const links: Route.LinksFunction = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
-  },
+  { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+  { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
+  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+  // Self-hosted fonts: preload the Latin files used above the fold (headings + body text).
+  { rel: 'preload', href: syneLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: jakartaLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

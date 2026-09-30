@@ -63,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
 
           {/* Navigation Links */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Navigation</h4>
+            <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Navigation</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -118,7 +118,7 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
 
           {/* Social Links */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Connect</h4>
+            <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Connect</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
@@ -180,7 +180,7 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
 
           {/* Studio Locations & World Clocks */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Studio Hubs</h4>
+            <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Studio Hubs</h2>
             <div className="space-y-2.5 text-xs">
               <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
                 <div>

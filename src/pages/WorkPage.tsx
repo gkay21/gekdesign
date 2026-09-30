@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, Search, Filter } from 'lucide-react';
 import { Project, PROJECTS } from '../data/projects';
+import { CardLink } from '../components/CardLink';
+import { ResponsiveImage } from '../components/ResponsiveImage';
+import { projectPath } from '../paths';
 
 interface WorkPageProps {
   onSelectProject: (project: Project) => void;
@@ -71,17 +74,19 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onSelectProject, onStartProj
       {/* Projects Grid */}
       {filteredProjects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
-          {filteredProjects.map((project) => (
-            <article
+          {filteredProjects.map((project, index) => (
+            <CardLink
               key={project.id}
-              onClick={() => onSelectProject(project)}
-              className="group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/25 transition-all duration-300 flex flex-col justify-between"
+              href={projectPath(project.slug)}
+              onNavigate={() => onSelectProject(project)}
+              className="group cursor-pointer rounded-2xl border border-white/10 bg-[#0C0C0E] overflow-hidden hover:border-white/25 transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <div className="overflow-hidden relative h-72 sm:h-96">
-                <img
-                  src={project.heroImage}
+                <ResponsiveImage
+                  picture={project.heroImage}
                   alt={project.title}
-                  referrerPolicy="no-referrer"
+                  sizes="(min-width: 1280px) 600px, (min-width: 768px) 50vw, 100vw"
+                  priority={index < 2}
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 <div className="absolute top-4 right-4 p-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity">
@@ -116,7 +121,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onSelectProject, onStartProj
                   </span>
                 </div>
               </div>
-            </article>
+            </CardLink>
           ))}
         </div>
       ) : (
@@ -165,7 +170,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onSelectProject, onStartProj
                 <td className="py-3.5 px-4 text-neutral-400">Early Childhood Education</td>
                 <td className="py-3.5 px-4 font-mono">2026</td>
                 <td className="py-3.5 px-4">Web Design · Performance · Local SEO</td>
-                <td className="py-3.5 px-4 text-right font-mono text-emerald-400">92 Mobile Lighthouse</td>
+                <td className="py-3.5 px-4 text-right font-mono text-emerald-400">100/100 Lighthouse</td>
               </tr>
               <tr className="hover:bg-white/5 transition-colors">
                 <td className="py-3.5 px-4 font-medium text-white">FDJ United (Unibet)</td>

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { X, ArrowRight, ExternalLink, ArrowLeft, CheckCircle2, Monitor, Smartphone } from 'lucide-react';
 import { Project, PROJECTS } from '../data/projects';
+import { useDialog } from '../lib/useDialog';
+import { ResponsiveImage } from './ResponsiveImage';
 
 interface CaseStudyModalProps {
   project: Project | null;
@@ -16,15 +18,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
   onStartProject,
 }) => {
   const [deviceView, setDeviceView] = useState<'desktop' | 'mobile'>('desktop');
-  const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  const dialogRef = useDialog<HTMLDivElement>(onClose);
 
   if (!project) return null;
 
@@ -34,10 +28,12 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-label={`${project.title} Case Study`}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl animate-fade-in"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl animate-fade-in focus:outline-none"
     >
       {/* Top sticky bar */}
       <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#09090B]/95 px-6 py-4 backdrop-blur-md">
@@ -56,7 +52,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           </button>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus:outline-none"
+            className="p-1.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label="Close case study"
           >
             <X className="w-5 h-5" />
@@ -98,20 +94,13 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
         {/* Hero Showcase Image */}
         <div className="relative rounded-xl overflow-hidden border border-white/10 bg-neutral-900 group">
-          {!imageError ? (
-            <img
-              src={project.heroImage}
-              alt={`${project.title} Interface Preview`}
-              referrerPolicy="no-referrer"
-              onError={() => setImageError(true)}
-              className="w-full h-auto max-h-[640px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.01]"
-            />
-          ) : (
-            <div className="w-full h-96 flex flex-col items-center justify-center bg-neutral-900 text-neutral-400 p-8 text-center">
-              <span className="font-display text-2xl text-white font-bold mb-2">{project.title}</span>
-              <span className="text-sm">{project.client} — Interface Archive</span>
-            </div>
-          )}
+          <ResponsiveImage
+            picture={project.heroImage}
+            alt={`${project.title} Interface Preview`}
+            sizes="(min-width: 1024px) 960px, 100vw"
+            priority
+            className="w-full h-auto max-h-[640px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.01]"
+          />
         </div>
 
         {/* Quantified Metrics Grid */}

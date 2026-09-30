@@ -61,7 +61,7 @@ export function validateContactBrief(brief: ContactBrief): ContactFieldErrors {
   if (!email) {
     errors.email = 'Please enter your email address.';
   } else if (!EMAIL_REGEX.test(email)) {
-    errors.email = 'Please enter a valid email address, e.g. jlv@brand.com.';
+    errors.email = 'Please enter a valid email address, e.g. jane@company.com.';
   }
   if (phone && !isValidAuPhone(phone)) {
     errors.phone = 'Please enter a valid Australian phone number, e.g. 0412 345 678 or +61 2 9825 8822.';

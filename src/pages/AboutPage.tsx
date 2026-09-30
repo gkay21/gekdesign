@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Award, Compass, HeartHandshake, ShieldCheck, Zap } from 'lucide-react';
-import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg';
+import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg?responsive';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 
 interface AboutPageProps {
   onStartProject: () => void;
@@ -55,10 +56,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onStartProject }) => {
 
       {/* Studio Workspace Showcase */}
       <div className="rounded-2xl border border-white/10 overflow-hidden relative group">
-        <img
-          src={studioWorkspace}
+        <ResponsiveImage
+          picture={studioWorkspace}
           alt="GEK Design Creative Studio Workspace"
-          referrerPolicy="no-referrer"
+          sizes="(min-width: 1280px) 1216px, 100vw"
+          priority
           className="w-full h-[360px] sm:h-[500px] object-cover object-center"
         />
         <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-neutral-300 gap-2">
