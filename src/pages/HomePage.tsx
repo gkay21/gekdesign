@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, ArrowRight, CheckCircle2, ChevronRight, Monitor, Smartphone, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 import { Project, PROJECTS } from '../data/projects';
 import { SERVICES, PROCESS_STEPS, CREDIBILITY_METRICS } from '../data/services';
 import { CardLink } from '../components/CardLink';
@@ -19,7 +19,6 @@ export const HomePage: React.FC<HomePageProps> = ({
   onStartProject,
 }) => {
   const [activeHeroTab, setActiveHeroTab] = useState<number>(0);
-  const [heroDevice, setHeroDevice] = useState<'desktop' | 'mobile'>('desktop');
 
   const featuredProjects = PROJECTS.slice(0, 4);
   const activeProject = featuredProjects[activeHeroTab] || featuredProjects[0];
@@ -90,27 +89,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   ))}
                 </div>
 
-                {/* Device viewport toggle */}
-                <div className="flex items-center justify-end gap-3">
-                  <div className="hidden sm:flex items-center gap-1 p-0.5 bg-black/40 rounded-md border border-white/10 text-xs">
-                    <button
-                      onClick={() => setHeroDevice('desktop')}
-                      className={`p-1.5 rounded cursor-pointer ${heroDevice === 'desktop' ? 'bg-white/20 text-white' : 'text-neutral-400 hover:text-white'}`}
-                      aria-label="Desktop Preview"
-                      title="Desktop Preview"
-                    >
-                      <Monitor className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      onClick={() => setHeroDevice('mobile')}
-                      className={`p-1.5 rounded cursor-pointer ${heroDevice === 'mobile' ? 'bg-white/20 text-white' : 'text-neutral-400 hover:text-white'}`}
-                      aria-label="Mobile Preview"
-                      title="Mobile Preview"
-                    >
-                      <Smartphone className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-
+                <div className="flex items-center justify-end">
                   <CardLink
                     href={projectPath(activeProject.slug)}
                     onNavigate={() => onSelectProject(activeProject)}
@@ -128,9 +107,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   href={projectPath(activeProject.slug)}
                   onNavigate={() => onSelectProject(activeProject)}
                   tabIndex={-1}
-                  className={`block transition-all duration-500 overflow-hidden rounded-xl border border-white/10 shadow-2xl relative group cursor-pointer ${
-                    heroDevice === 'desktop' ? 'w-full max-w-5xl' : 'w-[320px]'
-                  }`}
+                  className="block w-full max-w-5xl overflow-hidden rounded-xl border border-white/10 shadow-2xl relative group cursor-pointer"
                 >
                   <ResponsiveImage
                     picture={activeProject.heroImage}
