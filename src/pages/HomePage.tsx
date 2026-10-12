@@ -262,9 +262,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {featuredProjects[1].title}
               </h3>
               <p className="text-neutral-300 text-sm">{featuredProjects[1].shortOutcome}</p>
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="font-mono text-white font-semibold">{featuredProjects[1].metrics[0].value}</span>
-                <span className="inline-flex items-center gap-1 font-mono text-neutral-400 group-hover:text-white">
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs">
+                <span className="font-mono text-white font-semibold">
+                  {featuredProjects[1].metrics[0].value} <span className="text-neutral-400 font-normal">{featuredProjects[1].metrics[0].label}</span>
+                </span>
+                <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap font-mono text-neutral-400 group-hover:text-white">
                   <span>View Case Study</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </span>
@@ -296,9 +298,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {featuredProjects[2].title}
               </h3>
               <p className="text-neutral-300 text-sm">{featuredProjects[2].shortOutcome}</p>
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="font-mono text-white font-semibold">{featuredProjects[2].metrics[0].value}</span>
-                <span className="inline-flex items-center gap-1 font-mono text-neutral-400 group-hover:text-white">
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs">
+                <span className="font-mono text-white font-semibold">
+                  {featuredProjects[2].metrics[0].value} <span className="text-neutral-400 font-normal">{featuredProjects[2].metrics[0].label}</span>
+                </span>
+                <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap font-mono text-neutral-400 group-hover:text-white">
                   <span>View Case Study</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </span>

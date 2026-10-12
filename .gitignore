@@ -10,3 +10,4 @@ scripts/mockups/.cache/
 *.log
 .env*
 !.env.example
+.vercel
