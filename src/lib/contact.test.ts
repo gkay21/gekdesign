@@ -17,7 +17,7 @@ const brief = (overrides: Partial<ContactBrief> = {}): ContactBrief => ({
   website: 'https://example.com',
   message: 'We need a new website.',
   services: ['Web Design & Art Direction', 'Full-Stack Web Development'],
-  budget: '$25,000 – $50,000',
+  budget: '$15,000 – $25,000',
   timeline: '2 – 4 Weeks',
   ...overrides,
 });
@@ -70,7 +70,7 @@ describe('composeBriefMessage', () => {
     expect(composeBriefMessage(brief())).toBe(
       [
         'Services: Web Design & Art Direction, Full-Stack Web Development',
-        'Budget: $25,000 – $50,000',
+        'Budget: $15,000 – $25,000',
         'Timeline: 2 – 4 Weeks',
         'Company: Example Pty Ltd',
         'Website: https://example.com',
@@ -83,7 +83,7 @@ describe('composeBriefMessage', () => {
 
   it('omits empty fields and the details block when there is no message', () => {
     expect(composeBriefMessage(brief({ company: ' ', website: '', message: '' }))).toBe(
-      'Services: Web Design & Art Direction, Full-Stack Web Development\nBudget: $25,000 – $50,000\nTimeline: 2 – 4 Weeks'
+      'Services: Web Design & Art Direction, Full-Stack Web Development\nBudget: $15,000 – $25,000\nTimeline: 2 – 4 Weeks'
     );
   });
 });

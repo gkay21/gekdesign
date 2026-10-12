@@ -26,7 +26,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
   const [selectedServices, setSelectedServices] = useState<string[]>(
     initialService ? [initialService] : ['Web Design & Art Direction', 'Full-Stack Web Development']
   );
-  const [selectedBudget, setSelectedBudget] = useState<string>('$50,000 – $100,000');
+  const [selectedBudget, setSelectedBudget] = useState<string>('$15,000 – $25,000');
   const [selectedTimeline, setSelectedTimeline] = useState<string>('4 – 6 Weeks');
   const [formData, setFormData] = useState({
     name: '',
@@ -51,10 +51,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
   ];
 
   const budgetTiers = [
-    { label: '< $25,000', note: 'Focused design or audit sprint' },
-    { label: '$25,000 – $50,000', note: 'Standard custom website redesign' },
-    { label: '$50,000 – $100,000', note: 'Comprehensive digital flagship & branding' },
-    { label: '$100,000+', note: 'Enterprise platform, 3D WebGL & continuous retainer' },
+    { label: '< $10,000', note: 'Focused design or audit sprint' },
+    { label: '$10,000 – $15,000', note: 'Standard custom website redesign' },
+    { label: '$15,000 – $25,000', note: 'Comprehensive digital flagship & branding' },
+    { label: '$25,000+', note: 'Enterprise platform, 3D WebGL & continuous retainer' },
   ];
 
   const timelines = [
