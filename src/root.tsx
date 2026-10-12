@@ -7,7 +7,10 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
   useLocation,
+  useParams,
 } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights, computeRoute } from '@vercel/speed-insights/react';
 import type { Route } from './+types/root';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -95,10 +98,28 @@ const SiteShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
+// Vercel Web Analytics and Speed Insights. Both load same-origin scripts from /_vercel/*,
+// so the CSP needs no extra origins. Speed Insights groups pages by route (/work/[slug]).
+const VercelInsights: React.FC = () => {
+  const { pathname } = useLocation();
+  const params = useParams();
+  const definedParams = Object.fromEntries(
+    Object.entries(params).filter((entry): entry is [string, string] => entry[1] !== undefined)
+  );
+
+  return (
+    <>
+      <Analytics />
+      <SpeedInsights route={computeRoute(pathname, definedParams)} />
+    </>
+  );
+};
+
 export default function App() {
   return (
     <SiteShell>
       <Outlet />
+      <VercelInsights />
     </SiteShell>
   );
 }

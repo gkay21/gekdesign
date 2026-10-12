@@ -8,7 +8,13 @@ const sections = [
     heading: 'What we collect',
     body: [
       'Only what you enter in the contact form: your name and email address, and if you choose to give them, your company, website and project details, along with the services, budget and timeline you select.',
-      'This site has no accounts, sets no cookies and runs no analytics or advertising trackers.',
+      'This site has no accounts, sets no cookies and runs no advertising trackers.',
+    ],
+  },
+  {
+    heading: 'Analytics',
+    body: [
+      'We use Vercel Web Analytics and Speed Insights to count page visits and measure how fast pages load. They don’t use cookies and don’t identify you: visits are counted with an anonymous identifier that Vercel discards after 24 hours, and we only see totals such as page views, referring sites, countries and device types.',
     ],
   },
   {
