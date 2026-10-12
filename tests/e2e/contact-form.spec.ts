@@ -61,3 +61,19 @@ test('a mailer error is shown and the form keeps its values', async ({ page }) =
   await expect(page.getByRole('alert')).toHaveText('invalid email');
   await expect(page.getByLabel('Your Full Name *')).toHaveValue('Jane Smith');
 });
+
+test('a filled-in honeypot shows success but sends nothing', async ({ page }) => {
+  let requests = 0;
+  await page.route(MAILER, (route) => {
+    requests++;
+    return route.fulfill({ status: 200, body: '{}' });
+  });
+  await goToDetailsStep(page);
+  await page.getByLabel('Your Full Name *').fill('Spam Bot');
+  await page.getByLabel('Work Email Address *').fill('bot@spam.com');
+  await page.locator('#contact-reference').fill('https://spam.example');
+  await page.getByRole('button', { name: 'Submit Project Brief' }).click();
+
+  await expect(page.getByRole('button', { name: 'Submit Project Brief' })).toBeHidden();
+  expect(requests).toBe(0);
+});

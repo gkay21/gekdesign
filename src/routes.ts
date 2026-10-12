@@ -8,6 +8,7 @@ export default [
   route('about', 'routes/about.tsx'),
   route('insights', 'routes/insights.tsx', [route(':slug', 'routes/insights.$slug.tsx')]),
   route('contact', 'routes/contact.tsx'),
+  route('privacy', 'routes/privacy.tsx'),
   route('sitemap.xml', 'routes/sitemap.xml.ts'),
   route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;

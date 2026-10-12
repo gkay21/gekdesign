@@ -155,7 +155,11 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
           <div>
             © {new Date().getFullYear()} GEK DESIGN. All rights reserved.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <Link to={PATHS.privacy} className="hover:text-white transition-colors">
+              Privacy
+            </Link>
+            <span>·</span>
             <span>Crafted with intentional restraint</span>
             <span>·</span>
             <span>WCAG 2.1 AA Compliant</span>

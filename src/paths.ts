@@ -5,6 +5,7 @@ export const PATHS = {
   about: '/about',
   insights: '/insights',
   contact: '/contact',
+  privacy: '/privacy',
 } as const;
 
 export const projectPath = (slug: string) => `${PATHS.work}/${slug}`;

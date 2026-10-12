@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   buildMailerPayload,
   composeBriefMessage,
+  isHoneypotFilled,
   isValidAuPhone,
   MAILER_URL,
   sendToMailer,
@@ -30,6 +31,17 @@ describe('isValidAuPhone', () => {
   it.each(['12345', '0512 345 678', '+1 415 555 0100', '0412 345 678 999 999 99'])('rejects %s', (phone) =>
     expect(isValidAuPhone(phone)).toBe(false)
   );
+});
+
+describe('isHoneypotFilled', () => {
+  it('is false when the hidden field is empty or whitespace', () => {
+    expect(isHoneypotFilled('')).toBe(false);
+    expect(isHoneypotFilled('   ')).toBe(false);
+  });
+
+  it('is true when a bot has filled in the hidden field', () => {
+    expect(isHoneypotFilled('https://spam.example')).toBe(true);
+  });
 });
 
 describe('validateContactBrief', () => {
