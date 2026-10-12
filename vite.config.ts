@@ -2,7 +2,7 @@ import { reactRouter } from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import {defineConfig} from 'vite';
-import { responsiveImages } from './vite.imagetools';
+import { responsiveImages } from './vite.imagetools.ts';
 
 export default defineConfig(() => {
   return {
