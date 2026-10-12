@@ -50,6 +50,9 @@ export const isValidAuPhone = (phone: string): boolean => {
   );
 };
 
+/** True when the visually hidden honeypot input has a value: people never see it, bots fill it in. */
+export const isHoneypotFilled = (value: string): boolean => value.trim().length > 0;
+
 export function validateContactBrief(brief: ContactBrief): ContactFieldErrors {
   const errors: ContactFieldErrors = {};
   const email = brief.email.trim();

@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { PATHS } from '../paths';
+import { SOCIAL_LINKS } from '../data/social';
 import { ArrowUpRight } from 'lucide-react';
+
+// e.g. "14:05 AEDT": the zone name follows daylight saving instead of being hardcoded.
+const SYDNEY_TIME_FORMAT = new Intl.DateTimeFormat('en-AU', {
+  timeZone: 'Australia/Sydney',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZoneName: 'short',
+});
+const CLOCK_REFRESH_MS = 30_000;
 
 interface FooterProps {
   onStartProject: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
-  const [times, setTimes] = useState({
-    syd: '',
-    mel: '',
-    lon: '',
-  });
+  // Sydney's local time, set after hydration so the pre-rendered HTML doesn't bake in a build-time clock.
+  const [sydneyTime, setSydneyTime] = useState('');
 
   useEffect(() => {
-    const updateTimes = () => {
-      const now = new Date();
-      setTimes({
-        syd: now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: false }),
-        mel: now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Melbourne', hour: '2-digit', minute: '2-digit', hour12: false }),
-        lon: now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hour12: false }),
-      });
-    };
-    updateTimes();
-    const interval = setInterval(updateTimes, 30000);
+    const updateTime = () => setSydneyTime(SYDNEY_TIME_FORMAT.format(new Date()));
+    updateTime();
+    const interval = setInterval(updateTime, CLOCK_REFRESH_MS);
     return () => clearInterval(interval);
   }, []);
 
@@ -120,89 +121,31 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
           <div className="md:col-span-2 space-y-3">
             <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Connect</h2>
             <ul className="space-y-2 text-sm">
-              <li>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>X (Twitter)</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>LinkedIn</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>Instagram</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>GitHub</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://awwwards.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>Awwwards</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
-              </li>
+              {SOCIAL_LINKS.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-white transition-colors"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Studio Locations & World Clocks */}
+          {/* Studio Location & Local Time */}
           <div className="md:col-span-3 space-y-3">
-            <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Studio Hubs</h2>
-            <div className="space-y-2.5 text-xs">
-              <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
-                <div>
-                  <span className="text-white font-medium block">Sydney (HQ)</span>
-                  <span className="text-neutral-500">Design & Development Studio</span>
-                </div>
-                <span className="font-mono text-neutral-300 tabular-nums">{times.syd || '18:30'} AEST</span>
+            <h2 className="text-xs font-mono tracking-wider text-neutral-500 uppercase">Studio</h2>
+            <div className="flex items-center justify-between text-xs">
+              <div>
+                <span className="text-white font-medium block">Sydney, Australia</span>
+                <span className="text-neutral-500">Design & Development Studio</span>
               </div>
-              <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
-                <div>
-                  <span className="text-white font-medium block">Melbourne</span>
-                  <span className="text-neutral-500">Creative Engineering</span>
-                </div>
-                <span className="font-mono text-neutral-300 tabular-nums">{times.mel || '18:30'} AEST</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-white font-medium block">London</span>
-                  <span className="text-neutral-500">European Client Office</span>
-                </div>
-                <span className="font-mono text-neutral-300 tabular-nums">{times.lon || '09:30'} BST</span>
-              </div>
+              <span className="font-mono text-neutral-300 tabular-nums">{sydneyTime}</span>
             </div>
           </div>
         </div>
@@ -212,7 +155,11 @@ export const Footer: React.FC<FooterProps> = ({ onStartProject }) => {
           <div>
             © {new Date().getFullYear()} GEK DESIGN. All rights reserved.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <Link to={PATHS.privacy} className="hover:text-white transition-colors">
+              Privacy
+            </Link>
+            <span>·</span>
             <span>Crafted with intentional restraint</span>
             <span>·</span>
             <span>WCAG 2.1 AA Compliant</span>

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Check, CheckCircle2, ArrowRight, ArrowLeft, Mail, Phone, MapPin, Calendar, Clock } from 'lucide-react';
+import { Check, CheckCircle2, ArrowRight, ArrowLeft, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import {
   buildMailerPayload,
+  isHoneypotFilled,
   sendToMailer,
   validateContactBrief,
   type ContactBrief,
   type ContactField,
   type ContactFieldErrors,
 } from '../lib/contact';
+import { PATHS } from '../paths';
 
 const INPUT_CLASS =
   'w-full px-4 py-2.5 bg-white/5 border rounded-lg text-xs text-white placeholder-neutral-500 focus:outline-none';
@@ -33,6 +35,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
     website: '',
     message: '',
   });
+  const [honeypot, setHoneypot] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
@@ -92,6 +95,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
     setFieldErrors(errors);
     setSubmitError('');
     if (Object.keys(errors).length > 0) return;
+
+    // Bots get the success screen without anything being sent.
+    if (isHoneypotFilled(honeypot)) {
+      setIsSubmitted(true);
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -348,11 +357,33 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
                   />
                 </div>
 
+                {/* Spam honeypot: hidden from people and assistive tech, left in the DOM for bots. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                  <label htmlFor="contact-reference">Leave this field empty</label>
+                  <input
+                    id="contact-reference"
+                    name="contact_reference"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
                 {submitError && (
                   <div role="alert" className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs text-red-300">
                     {submitError}
                   </div>
                 )}
+
+                <p className="text-[11px] text-neutral-500">
+                  We only use your details to reply to your enquiry. See our{' '}
+                  <a href={PATHS.privacy} className="underline underline-offset-2 hover:text-white">
+                    privacy policy
+                  </a>
+                  .
+                </p>
 
                 <div className="pt-4 flex items-center justify-between">
                   <button
@@ -450,27 +481,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
             <p className="text-sm text-neutral-300 leading-relaxed max-w-md mx-auto">
               Our principal George and the design leadership have received your brief. We will review your project parameters and send an initial evaluation to <span className="text-white font-mono">{formData.email}</span> within 24 hours.
             </p>
-          </div>
-
-          {/* Booking Preview Box */}
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10 text-left space-y-4">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-mono text-neutral-400 uppercase">Optional Next Step:</span>
-              <span className="text-blue-400 font-mono">Instant Booking</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-blue-400" />
-              <div>
-                <span className="text-sm font-semibold text-white block">Schedule 30-Min Discovery Call</span>
-                <span className="text-xs text-neutral-400">Direct calendar access with George & Studio Leadership</span>
-              </div>
-            </div>
-            <a
-              href={`mailto:george@gekdesign.com.au?subject=Discovery Call: ${formData.company || formData.name}`}
-              className="block w-full py-2.5 text-center text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
-            >
-              Open Direct Calendar Link
-            </a>
           </div>
 
           <button

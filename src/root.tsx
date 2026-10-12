@@ -14,6 +14,7 @@ import { Footer } from './components/Footer';
 import { NotFound } from './components/NotFound';
 import { useSiteNavigation } from './lib/navigation';
 import { SITE_NAME, SITE_URL } from './lib/seo';
+import { SOCIAL_LINKS } from './data/social';
 import '@fontsource-variable/plus-jakarta-sans/wght.css';
 import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
 import '@fontsource-variable/syne/wght.css';
@@ -37,8 +38,17 @@ const ORGANIZATION_JSON_LD = {
     'E-commerce Development',
     'Creative Direction',
   ],
+  email: 'george@gekdesign.com.au',
+  telephone: '+61400424449',
+  foundingDate: '2015',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Sydney',
+    addressRegion: 'NSW',
+    addressCountry: 'AU',
+  },
   areaServed: 'Global',
-  priceRange: '$$$$',
+  sameAs: SOCIAL_LINKS.map((link) => link.href),
 };
 
 export const links: Route.LinksFunction = () => [

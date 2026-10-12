@@ -8,6 +8,7 @@ test.describe('pages and routing', () => {
     ['/about', /About/],
     ['/insights', /Insights/],
     ['/contact', /Start a Project/],
+    ['/privacy', /Privacy Policy/],
   ] as const) {
     test(`${path} renders with its own title`, async ({ page }) => {
       await page.goto(path);
