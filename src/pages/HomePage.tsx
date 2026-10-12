@@ -386,7 +386,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   onClick={() => onNavigate('about')}
                   className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                 >
-                  <span>Read our manifesto & history</span>
+                  <span>Read our story</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
