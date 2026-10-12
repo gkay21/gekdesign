@@ -48,7 +48,6 @@ const ORGANIZATION_JSON_LD = {
     addressCountry: 'AU',
   },
   areaServed: 'Global',
-  priceRange: '$$$$',
   sameAs: SOCIAL_LINKS.map((link) => link.href),
 };
 
