@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowUpRight, Search, Filter } from 'lucide-react';
 import { Project, PROJECTS } from '../data/projects';
 import { CardLink } from '../components/CardLink';
+import { ProjectHighlight } from '../components/ProjectHighlight';
 import { ResponsiveImage } from '../components/ResponsiveImage';
 import { projectPath } from '../paths';
 
@@ -113,7 +114,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onSelectProject, onStartProj
 
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
                   <span className="font-mono text-white font-semibold">
-                    {project.metrics[0].value} <span className="text-neutral-400 font-normal">{project.metrics[0].label}</span>
+                    <ProjectHighlight project={project} labelClassName="text-neutral-400 font-normal" />
                   </span>
                   <span className="inline-flex items-center gap-1 font-mono text-neutral-400 group-hover:text-white">
                     <span>Inspect Case Study</span>
@@ -163,7 +164,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onSelectProject, onStartProj
                 <td className="py-3.5 px-4 text-neutral-400">Healthcare & Dentistry</td>
                 <td className="py-3.5 px-4 font-mono">2024</td>
                 <td className="py-3.5 px-4">Web Design · Static Next.js Build · Ongoing Support</td>
-                <td className="py-3.5 px-4 text-right font-mono text-emerald-400">12 Treatment Guides</td>
+                <td className="py-3.5 px-4 text-right font-mono text-emerald-400">Design, Build & Care</td>
               </tr>
               <tr className="hover:bg-white/5 transition-colors">
                 <td className="py-3.5 px-4 font-medium text-white">Mini Minds Early Learning Centre</td>

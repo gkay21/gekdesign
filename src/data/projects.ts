@@ -22,6 +22,8 @@ export interface Project {
   category: "E-commerce" | "SaaS & Platforms" | "Healthcare & Services";
   services: string[];
   shortOutcome: string;
+  /** Text shown on listing cards in place of the first metric, when a number would undersell the project. */
+  cardHighlight?: string;
   /** Case study section headings, written per project (no generic filler). */
   challengeHeading: string;
   approachHeading: string;
@@ -78,6 +80,7 @@ export const PROJECTS: Project[] = [
     ],
     shortOutcome:
       "A fast, static practice website with 12 treatment guides, a patient education blog, and one-tap booking and calling on every page",
+    cardHighlight: "Design, Build & Care",
     challengeHeading:
       "A long-standing family practice, explained clearly online.",
     approachHeading:

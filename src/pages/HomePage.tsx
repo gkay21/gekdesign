@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowRight, CheckCircle2, ChevronRight, Sparkles } from '
 import { Project, PROJECTS } from '../data/projects';
 import { SERVICES, PROCESS_STEPS, CREDIBILITY_METRICS } from '../data/services';
 import { CardLink } from '../components/CardLink';
+import { ProjectHighlight } from '../components/ProjectHighlight';
 import { ResponsiveImage } from '../components/ResponsiveImage';
 import { projectPath } from '../paths';
 import studioWorkspace from '../assets/images/studio_creative_workspace_1790321300104.jpg?responsive';
@@ -204,7 +205,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <div className="font-mono text-sm font-semibold text-white">
-                    {featuredProjects[0].metrics[0].value} <span className="text-xs text-neutral-400 font-normal">{featuredProjects[0].metrics[0].label}</span>
+                    <ProjectHighlight project={featuredProjects[0]} labelClassName="text-xs text-neutral-400 font-normal" />
                   </div>
                   <span className="inline-flex items-center gap-1 text-xs font-mono text-neutral-300 group-hover:text-white">
                     <span>View Case Study</span>
@@ -241,7 +242,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <p className="text-neutral-300 text-sm">{featuredProjects[1].shortOutcome}</p>
               <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs">
                 <span className="font-mono text-white font-semibold">
-                  {featuredProjects[1].metrics[0].value} <span className="text-neutral-400 font-normal">{featuredProjects[1].metrics[0].label}</span>
+                  <ProjectHighlight project={featuredProjects[1]} labelClassName="text-neutral-400 font-normal" />
                 </span>
                 <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap font-mono text-neutral-400 group-hover:text-white">
                   <span>View Case Study</span>
@@ -277,7 +278,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <p className="text-neutral-300 text-sm">{featuredProjects[2].shortOutcome}</p>
               <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs">
                 <span className="font-mono text-white font-semibold">
-                  {featuredProjects[2].metrics[0].value} <span className="text-neutral-400 font-normal">{featuredProjects[2].metrics[0].label}</span>
+                  <ProjectHighlight project={featuredProjects[2]} labelClassName="text-neutral-400 font-normal" />
                 </span>
                 <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap font-mono text-neutral-400 group-hover:text-white">
                   <span>View Case Study</span>
