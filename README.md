@@ -29,8 +29,13 @@ The case study images are real client-site screenshots composited into scenes; s
 
 ## Deployment
 
-`pnpm build` writes a fully static site to `build/client/`: one `index.html` per page (for example `work/vodafone-shop/index.html`), plus `sitemap.xml`, `robots.txt` and `404.html`. Upload that folder to any static host that:
+Hosted on Vercel; `vercel.json` holds the whole setup. `pnpm build` writes a fully static site to `build/client/`: one `index.html` per page (for example `work/vodafone-shop/index.html`), plus `sitemap.xml`, `robots.txt` and `404.html`. Vercel serves it with:
 
-- serves clean URLs (`/work` → `work/index.html`)
-- responds to unknown paths with `404.html` and a 404 status
-- caches `assets/*` long-term (the filenames are content-hashed) and HTML briefly
+- clean URLs with no trailing slash (`/work/` redirects to `/work`, matching the canonical URLs)
+- `404.html` and a 404 status for unknown paths
+- long-term caching for `assets/*` (the filenames are content-hashed)
+- security headers, including a Content-Security-Policy. If the site starts loading anything from another origin (analytics, embeds, or a different `VITE_MAILER_URL`), add that origin to the CSP in `vercel.json` or the browser will block it.
+
+The contact form only works on `gekdesign.com.au`: the mailer rejects other origins, so it returns 403 on `*.vercel.app` preview deployments.
+
+CI (`.github/workflows/ci.yml`) runs the type check, unit tests and e2e tests on every push to `master` and every pull request.

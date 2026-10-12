@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, CheckCircle2, ArrowRight, ArrowLeft, Mail, Phone, MapPin, Calendar, Clock } from 'lucide-react';
+import { Check, CheckCircle2, ArrowRight, ArrowLeft, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import {
   buildMailerPayload,
   sendToMailer,
@@ -450,27 +450,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onNavi
             <p className="text-sm text-neutral-300 leading-relaxed max-w-md mx-auto">
               Our principal George and the design leadership have received your brief. We will review your project parameters and send an initial evaluation to <span className="text-white font-mono">{formData.email}</span> within 24 hours.
             </p>
-          </div>
-
-          {/* Booking Preview Box */}
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10 text-left space-y-4">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-mono text-neutral-400 uppercase">Optional Next Step:</span>
-              <span className="text-blue-400 font-mono">Instant Booking</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-blue-400" />
-              <div>
-                <span className="text-sm font-semibold text-white block">Schedule 30-Min Discovery Call</span>
-                <span className="text-xs text-neutral-400">Direct calendar access with George & Studio Leadership</span>
-              </div>
-            </div>
-            <a
-              href={`mailto:george@gekdesign.com.au?subject=Discovery Call: ${formData.company || formData.name}`}
-              className="block w-full py-2.5 text-center text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
-            >
-              Open Direct Calendar Link
-            </a>
           </div>
 
           <button

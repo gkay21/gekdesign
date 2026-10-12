@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Clock, Calendar, BookOpen } from 'lucide-react';
+import { ArrowUpRight, Clock } from 'lucide-react';
 import { Article, ARTICLES } from '../data/articles';
 import { CardLink } from '../components/CardLink';
 import { articlePath } from '../paths';
@@ -89,37 +89,18 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ onSelectArticle, onS
         ))}
       </div>
 
-      {/* Newsletter / Publication Box */}
-      <div className="p-8 sm:p-12 rounded-2xl bg-neutral-900 border border-white/10 space-y-6 max-w-3xl mx-auto text-center">
-        <div className="w-10 h-10 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mx-auto">
-          <BookOpen className="w-5 h-5" />
+      {/* Start Project Banner */}
+      <div className="p-8 sm:p-12 rounded-2xl bg-neutral-900 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="space-y-1">
+          <h2 className="font-display text-2xl font-bold text-white">Have a project in mind?</h2>
+          <p className="text-sm text-neutral-400">Tell us what you’re building and we’ll get back to you within 24 hours.</p>
         </div>
-        <div className="space-y-2">
-          <h3 className="font-display text-2xl font-bold text-white">The GEK Design Dispatch</h3>
-          <p className="text-xs sm:text-sm text-neutral-400">
-            A private, four-times-a-year brief dissecting digital design, headless architecture, and commercial conversion. Zero spam.
-          </p>
-        </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert('Thank you for subscribing to The Forma Quarterly.');
-          }}
-          className="flex flex-col sm:flex-row items-center gap-2 max-w-md mx-auto"
+        <button
+          onClick={onStartProject}
+          className="px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors cursor-pointer shrink-0"
         >
-          <input
-            type="email"
-            required
-            placeholder="Enter your professional email..."
-            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/30"
-          />
-          <button
-            type="submit"
-            className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors cursor-pointer shrink-0"
-          >
-            Subscribe
-          </button>
-        </form>
+          Start a Project
+        </button>
       </div>
     </div>
   );

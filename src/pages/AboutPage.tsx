@@ -64,7 +64,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onStartProject }) => {
           className="w-full h-[360px] sm:h-[500px] object-cover object-center"
         />
         <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-neutral-300 gap-2">
-          <span>Design Direction & Creative Engineering — Sydney, Australia (HQ)</span>
+          <span>Design Direction & Creative Engineering — Sydney, Australia</span>
           <span className="font-mono text-neutral-400">Available Globally</span>
         </div>
       </div>
@@ -99,7 +99,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onStartProject }) => {
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-white">The Minds Behind the Studio</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="max-w-md">
           {leadership.map((leader) => (
             <div key={leader.name} className="p-8 rounded-xl border border-white/10 bg-[#0C0C0E] space-y-5">
               <div className="w-16 h-16 rounded-full bg-neutral-800 border border-white/15 flex items-center justify-center font-display text-xl font-bold text-white">
@@ -125,22 +125,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onStartProject }) => {
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">Studio Presence</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-neutral-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-neutral-300">
           <div className="space-y-2 p-5 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="font-display text-base font-bold text-white">Sydney Studio (HQ)</h3>
+            <h3 className="font-display text-base font-bold text-white">Sydney Studio</h3>
             <p className="text-neutral-400">Sydney, Australia</p>
-            <span className="text-neutral-300 font-mono block">+61 400 424 449</span>
-            <span className="text-neutral-500 font-mono block">george@gekdesign.com.au</span>
+            <a href="tel:+61400424449" className="text-neutral-300 font-mono block hover:text-white">+61 400 424 449</a>
+            <a href="mailto:george@gekdesign.com.au" className="text-neutral-400 font-mono block hover:text-white">george@gekdesign.com.au</a>
           </div>
           <div className="space-y-2 p-5 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="font-display text-base font-bold text-white">Melbourne Studio</h3>
-            <p className="text-neutral-400">Melbourne, Australia</p>
-            <span className="text-neutral-500 font-mono block">melbourne@gekdesign.com.au</span>
-          </div>
-          <div className="space-y-2 p-5 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="font-display text-base font-bold text-white">International & Remote</h3>
-            <p className="text-neutral-400">London & European Partners</p>
-            <span className="text-neutral-500 font-mono block">london@gekdesign.com.au</span>
+            <h3 className="font-display text-base font-bold text-white">Remote Engagements</h3>
+            <p className="text-neutral-400">Available globally</p>
           </div>
         </div>
 
